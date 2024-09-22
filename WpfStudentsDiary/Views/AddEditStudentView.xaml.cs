@@ -12,8 +12,9 @@ using System.Windows.Input;
 using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
+using WpfStudentsDiary.ViewModels;
 
-namespace WpfStudentsDiary
+namespace WpfStudentsDiary.Views
 {
     /// <summary>
     /// Interaction logic for AddEditStudentView.xaml
@@ -23,6 +24,7 @@ namespace WpfStudentsDiary
         public AddEditStudentView()
         {
             InitializeComponent();
+            DataContext = new AddEditStudentViewModel();
         }
     }
 }

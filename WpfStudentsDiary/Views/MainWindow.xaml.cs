@@ -13,8 +13,9 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Navigation;
 using System.Windows.Shapes;
+using WpfStudentsDiary.ViewModels;
 
-namespace WpfStudentsDiary
+namespace WpfStudentsDiary.Views
 {
     /// <summary>
     /// Interaction logic for MainWindow.xaml
@@ -24,6 +25,7 @@ namespace WpfStudentsDiary
         public MainWindow()
         {
             InitializeComponent();
+            DataContext = new MainViewModel();
         }
     }
 }
