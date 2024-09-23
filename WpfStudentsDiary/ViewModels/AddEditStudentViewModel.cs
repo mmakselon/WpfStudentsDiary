@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfStudentsDiary.ViewModels
 {
-    class AddEditStudentViewModel :ViewModelBase
+    public class AddEditStudentViewModel :ViewModelBase
     {
     }
 }

@@ -24,6 +24,11 @@
             <ComboBox Height="26" Width="150" Margin="5"/>
             <Button Command="{Binding RefreshStudentsCommand}" Content="Odśwież" Height="25" Width="100" Margin="5"/>
         </StackPanel>
-        <DataGrid Grid.Row="1" Margin="5"/>
+        <DataGrid
+            Grid.Row="1"
+            Margin="5"
+            ItemsSource="{Binding Students}"
+            SelectedItem="{Binding SelectedStudent}"
+            />
     </Grid>
 </mah:MetroWindow>

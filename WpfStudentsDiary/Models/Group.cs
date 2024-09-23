@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace WpfStudentsDiary.Models
 {
-    class Group
+    public class Group
     {
         public int Id { get; set; }
         public string Name { get; set; }
