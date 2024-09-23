@@ -7,28 +7,76 @@
         xmlns:local="clr-namespace:WpfStudentsDiary"
         mc:Ignorable="d"
         WindowStartupLocation="CenterScreen"
-        Title="Dziennik ucznia" Height="450" Width="800">
+        Title="Dziennik ucznia" Height="450" Width="900">
+    
     <Grid>
-        <Grid.ColumnDefinitions>
-            <ColumnDefinition Width="0*"/>
-            <ColumnDefinition/>
-        </Grid.ColumnDefinitions>
         <Grid.RowDefinitions>
-            <RowDefinition Height="Auto"/>
-            <RowDefinition/>
+            <RowDefinition Height="Auto" />
+            <RowDefinition />
         </Grid.RowDefinitions>
-        <StackPanel Orientation="Horizontal" Grid.ColumnSpan="2" Margin="0,0,-0.4,0.2">
-            <Button Content="Dodaj" Height="25" Width="100" Margin="5"/>
-            <Button Content="Edytuj" Height="25" Width="100" Margin="5"/>
-            <Button Content="Usuń" Height="25" Width="100" Margin="5"/>
-            <ComboBox Height="26" Width="150" Margin="5"/>
-            <Button Command="{Binding RefreshStudentsCommand}" Content="Odśwież" Height="25" Width="100" Margin="5"/>
+        <StackPanel Orientation="Horizontal">
+
+            <Button Command="{Binding AddStudentCommand}"
+                    Content="Dodaj" 
+                    Height="25" 
+                    Width="100" 
+                    Margin="5" />
+            
+            <Button 
+                Command="{Binding EditStudentCommand}"
+                CommandParameter="{Binding SelectedStudent}"
+                Content="Edytuj" 
+                Height="25" 
+                Width="100" 
+                Margin="5" />
+           
+            <Button 
+                Command="{Binding DeleteStudentCommand}"
+                Content="Usuń" 
+                Height="25" 
+                Width="100" 
+                Margin="5" />
+            
+            <ComboBox 
+                Height="26" 
+                Width="150" 
+                Margin="5"
+                ItemsSource="{Binding Groups}"
+                SelectedValue="{Binding SelectedGroupId}"
+                DisplayMemberPath="Name"
+                SelectedValuePath="Id"
+                />
+            
+            <Button 
+                Command="{Binding RefreshStudentsCommand}" 
+                Content="Odśwież" 
+                Height="25" 
+                Width="100" 
+                Margin="5" />
+            
         </StackPanel>
-        <DataGrid
-            Grid.Row="1"
+        <DataGrid 
+            Grid.Row="1" 
             Margin="5"
             ItemsSource="{Binding Students}"
             SelectedItem="{Binding SelectedStudent}"
-            />
+            CanUserAddRows="False"
+            IsReadOnly="True"
+            SelectionMode="Single"
+            AutoGenerateColumns="False">
+            <DataGrid.Columns>
+                <DataGridTextColumn Binding="{Binding Id}" Visibility="Hidden" />
+                <DataGridTextColumn Binding="{Binding FirstName}" Header="Imię" />
+                <DataGridTextColumn Binding="{Binding LastName}" Header="Nazwisko" />
+                <DataGridTextColumn Binding="{Binding Comments}" Header="Uwagi" />
+                <DataGridTextColumn Binding="{Binding Math}" Header="Matematyka" />
+                <DataGridTextColumn Binding="{Binding Technology}" Header="Technologia" />
+                <DataGridTextColumn Binding="{Binding Physics}" Header="Fizyka" />
+                <DataGridTextColumn Binding="{Binding PolishLang}" Header="Język polski" />
+                <DataGridTextColumn Binding="{Binding ForeignLang}" Header="Język obcy" />
+                <DataGridCheckBoxColumn Binding="{Binding Activities}" Header="Dodatkowe" />
+                <DataGridTextColumn Binding="{Binding Group.Name}" Header="Grupa" />
+            </DataGrid.Columns>
+        </DataGrid>
     </Grid>
 </mah:MetroWindow>
