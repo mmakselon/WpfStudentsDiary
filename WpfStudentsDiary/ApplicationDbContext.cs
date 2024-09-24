@@ -1,6 +1,8 @@
+using DiaWpfStudentsDiaryry.Models.Configurations;
 using System;
 using System.Data.Entity;
 using System.Linq;
+using WpfStudentsDiary.Models.Configurations;
 using WpfStudentsDiary.Models.Domains;
 
 namespace WpfStudentsDiary
@@ -21,6 +23,13 @@ namespace WpfStudentsDiary
         public DbSet<Student> Students { get; set; }
         public DbSet<Group> Groups { get; set; }
         public DbSet<Rating> Ratings { get; set; }
+
+        protected override void OnModelCreating(DbModelBuilder modelBuilder)
+        {
+            modelBuilder.Configurations.Add(new StudentConfiguration());
+            modelBuilder.Configurations.Add(new GroupConfiguration());
+            modelBuilder.Configurations.Add(new RatingConfiguration());
+        }
 
         // on configuring and using a Code First model, see http://go.microsoft.com/fwlink/?LinkId=390109.
 
