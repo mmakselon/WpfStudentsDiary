@@ -8,20 +8,21 @@ using System.Windows;
 using System.Windows.Input;
 using WpfStudentsDiary.Commands;
 using WpfStudentsDiary.Models;
+using WpfStudentsDiary.Models.Wrappers;
 
 namespace WpfStudentsDiary.ViewModels
 {
     public class AddEditStudentViewModel : ViewModelBase
     {
 
-        public AddEditStudentViewModel(Student student = null)
+        public AddEditStudentViewModel(StudentWrapper student = null)
         {
             CloseCommand = new RelayCommand(Close);
             ConfirmCommand = new RelayCommand(Confirm);
 
             if (student == null)
             {
-                Student = new Student();
+                Student = new StudentWrapper();
             }
             else
             {
@@ -36,8 +37,8 @@ namespace WpfStudentsDiary.ViewModels
         public ICommand ConfirmCommand { get; set; }
 
 
-        private Student _student;
-        public Student Student
+        private StudentWrapper _student;
+        public StudentWrapper Student
         {
             get { return _student; }
             set 
@@ -70,8 +71,8 @@ namespace WpfStudentsDiary.ViewModels
             }
         }
 
-        private ObservableCollection<Group> _group;
-        public ObservableCollection<Group> Groups
+        private ObservableCollection<GroupWrapper> _group;
+        public ObservableCollection<GroupWrapper> Groups
         {
             get { return _group; }
             set
@@ -114,14 +115,14 @@ namespace WpfStudentsDiary.ViewModels
 
         private void InitGroups()
         {
-            var groups = new ObservableCollection<Group>
+            var groups = new ObservableCollection<GroupWrapper>
             {
-            new Group { Id=0, Name="-- brak --"},
-            new Group { Id=1, Name="1A"},
-            new Group { Id=2, Name="2A"},
+            new GroupWrapper { Id=0, Name="-- brak --"},
+            new GroupWrapper { Id=1, Name="1A"},
+            new GroupWrapper { Id=2, Name="2A"},
             };
 
-            Groups = new ObservableCollection<Group>(groups);
+            Groups = new ObservableCollection<GroupWrapper>(groups);
 
             SelectedGroupId = Student.Group.Id;
         }

@@ -13,6 +13,7 @@ using System.Windows.Media;
 using System.Windows.Media.Imaging;
 using System.Windows.Shapes;
 using WpfStudentsDiary.Models;
+using WpfStudentsDiary.Models.Wrappers;
 using WpfStudentsDiary.ViewModels;
 
 namespace WpfStudentsDiary.Views
@@ -22,7 +23,7 @@ namespace WpfStudentsDiary.Views
     /// </summary>
     public partial class AddEditStudentView : MetroWindow
     {
-        public AddEditStudentView(Student student = null)
+        public AddEditStudentView(StudentWrapper student = null)
         {
             InitializeComponent();
             DataContext = new AddEditStudentViewModel(student);
