@@ -87,6 +87,7 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\GroupConfiguration.cs" />
     <Compile Include="Models\Configurations\RatingConfiguration.cs" />
     <Compile Include="Models\Configurations\StudentConfiguration.cs" />
