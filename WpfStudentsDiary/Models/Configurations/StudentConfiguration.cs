@@ -23,6 +23,7 @@ namespace WpfStudentsDiary.Models.Configurations
             Property(x => x.LastName)
                 .HasMaxLength(100)
                 .IsRequired();
+
         }
     }
 }
