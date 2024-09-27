@@ -87,11 +87,6 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
-    <Compile Include="Migrations\202409242000383_InitialCreate.cs" />
-    <Compile Include="Migrations\202409242000383_InitialCreate.Designer.cs">
-      <DependentUpon>202409242000383_InitialCreate.cs</DependentUpon>
-    </Compile>
-    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\GroupConfiguration.cs" />
     <Compile Include="Models\Configurations\RatingConfiguration.cs" />
     <Compile Include="Models\Configurations\StudentConfiguration.cs" />
@@ -130,9 +125,6 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
-    <EmbeddedResource Include="Migrations\202409242000383_InitialCreate.resx">
-      <DependentUpon>202409242000383_InitialCreate.cs</DependentUpon>
-    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -147,6 +139,7 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="DbScripts\" />
     <Folder Include="Models\Converters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
