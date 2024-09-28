@@ -12,11 +12,14 @@ using System.Windows.Input;
 using WpfStudentsDiary.Commands;
 using WpfStudentsDiary.Models;
 using WpfStudentsDiary.Models.Wrappers;
+using WpfStudentsDiary.Models.Domains;
 
 namespace WpfStudentsDiary.ViewModels
 {
     public class MainViewModel : ViewModelBase
     {
+        private Repository _repository = new Repository();
+
         public MainViewModel()
         {
                 AddStudentCommand = new RelayCommand(AddEditStudent);
@@ -69,9 +72,9 @@ namespace WpfStudentsDiary.ViewModels
             }
         }
 
-        private ObservableCollection<GroupWrapper> _group;
+        private ObservableCollection<Group> _group;
 
-        public ObservableCollection<GroupWrapper> Groups
+        public ObservableCollection<Group> Groups
         {
             get { return _group; }
             set
@@ -122,12 +125,11 @@ namespace WpfStudentsDiary.ViewModels
 
         private void InitGroups()
         {
-            Groups = new ObservableCollection<GroupWrapper>
-            {
-                new GroupWrapper { Id=0, Name="Wszystkie"},
-                new GroupWrapper { Id=1, Name="1A"},
-                new GroupWrapper { Id=2, Name="1B"},
-            };
+            var groups = _repository.GetGroups();
+            groups.Insert(0,new Group{ Id = 0, Name = "Wszystkie" });
+
+            Groups = new ObservableCollection<Group>(groups);
+
             SelectedGroupId = 0;
         }
 

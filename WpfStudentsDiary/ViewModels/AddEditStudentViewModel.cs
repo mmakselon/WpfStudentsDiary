@@ -8,12 +8,15 @@ using System.Windows;
 using System.Windows.Input;
 using WpfStudentsDiary.Commands;
 using WpfStudentsDiary.Models;
+using WpfStudentsDiary.Models.Domains;
 using WpfStudentsDiary.Models.Wrappers;
 
 namespace WpfStudentsDiary.ViewModels
 {
     public class AddEditStudentViewModel : ViewModelBase
     {
+
+        private Repository _repository;
 
         public AddEditStudentViewModel(StudentWrapper student = null)
         {
@@ -71,8 +74,8 @@ namespace WpfStudentsDiary.ViewModels
             }
         }
 
-        private ObservableCollection<GroupWrapper> _group;
-        public ObservableCollection<GroupWrapper> Groups
+        private ObservableCollection<Group> _group;
+        public ObservableCollection<Group> Groups
         {
             get { return _group; }
             set
@@ -115,16 +118,12 @@ namespace WpfStudentsDiary.ViewModels
 
         private void InitGroups()
         {
-            var groups = new ObservableCollection<GroupWrapper>
-            {
-            new GroupWrapper { Id=0, Name="-- brak --"},
-            new GroupWrapper { Id=1, Name="1A"},
-            new GroupWrapper { Id=2, Name="2A"},
-            };
+            var groups = _repository.GetGroups();
+            groups.Insert(0, new Group { Id = 0, Name = "-- brak --" });
 
-            Groups = new ObservableCollection<GroupWrapper>(groups);
+            Groups = new ObservableCollection<Group>(groups);
 
-            SelectedGroupId = Student.Group.Id;
+            Student.Group.Id = 0;
         }
     }
 }
