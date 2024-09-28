@@ -87,6 +87,19 @@
     <Compile Include="ApplicationDbContext.cs" />
     <Compile Include="Commands\AsyncRelayCommand.cs" />
     <Compile Include="Commands\RelayCommand.cs" />
+    <Compile Include="Migrations\202409271059068_InitialCreate.cs" />
+    <Compile Include="Migrations\202409271059068_InitialCreate.Designer.cs">
+      <DependentUpon>202409271059068_InitialCreate.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202409271103240_SetFirstNameMaxLengthAndRequiredInStudentsTable.cs" />
+    <Compile Include="Migrations\202409271103240_SetFirstNameMaxLengthAndRequiredInStudentsTable.Designer.cs">
+      <DependentUpon>202409271103240_SetFirstNameMaxLengthAndRequiredInStudentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\202409281942399_SetLastNameMaxLengthAndRequiredInStudentsTable.cs" />
+    <Compile Include="Migrations\202409281942399_SetLastNameMaxLengthAndRequiredInStudentsTable.Designer.cs">
+      <DependentUpon>202409281942399_SetLastNameMaxLengthAndRequiredInStudentsTable.cs</DependentUpon>
+    </Compile>
+    <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\Configurations\GroupConfiguration.cs" />
     <Compile Include="Models\Configurations\RatingConfiguration.cs" />
     <Compile Include="Models\Configurations\StudentConfiguration.cs" />
@@ -125,6 +138,15 @@
       <DependentUpon>Settings.settings</DependentUpon>
       <DesignTimeSharedInput>True</DesignTimeSharedInput>
     </Compile>
+    <EmbeddedResource Include="Migrations\202409271059068_InitialCreate.resx">
+      <DependentUpon>202409271059068_InitialCreate.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409271103240_SetFirstNameMaxLengthAndRequiredInStudentsTable.resx">
+      <DependentUpon>202409271103240_SetFirstNameMaxLengthAndRequiredInStudentsTable.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Migrations\202409281942399_SetLastNameMaxLengthAndRequiredInStudentsTable.resx">
+      <DependentUpon>202409281942399_SetLastNameMaxLengthAndRequiredInStudentsTable.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="Properties\Resources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>Resources.Designer.cs</LastGenOutput>
@@ -139,8 +161,10 @@
     <None Include="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="DbScripts\" />
     <Folder Include="Models\Converters\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="DbScripts\202409281942399_SetLastNameMaxLengthAndRequiredInStudentsTable.sql" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>
