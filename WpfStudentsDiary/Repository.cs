@@ -5,6 +5,7 @@ using System.Threading.Tasks;
 using WpfStudentsDiary.Models.Domains;
 using WpfStudentsDiary.Models.Wrappers;
 using System.Data.Entity;
+using WpfStudentsDiary.Models.Converters;
 
 namespace WpfStudentsDiary
 {
@@ -32,7 +33,10 @@ namespace WpfStudentsDiary
                 if (groupId != 0)
                     students = students.Where(x => x.GroupId == groupId);
 
-                return students.ToList();
+               return students
+                    .ToList()
+                    .Select(x=> x.ToWrapper())
+                    .ToList();
             }
         }
     }
