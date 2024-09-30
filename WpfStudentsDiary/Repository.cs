@@ -7,6 +7,7 @@ using WpfStudentsDiary.Models.Wrappers;
 using System.Data.Entity;
 using WpfStudentsDiary.Models.Converters;
 using System;
+using Diary.Models;
 
 namespace WpfStudentsDiary
 {
@@ -47,6 +48,80 @@ namespace WpfStudentsDiary
             {
                 var studentToDelete = context.Students.Find(id);
                 context.Students.Remove(studentToDelete);
+                context.SaveChanges();
+            }
+        }
+
+        public void UpdateStudent(StudentWrapper studentWrapper)
+        {
+            var student = studentWrapper.ToDao();
+            var ratings = studentWrapper.ToRatingDao();
+
+            using (var context = new ApplicationDbContext())
+            {
+                var studentToUpdate = context.Students.Find(student.Id);
+                studentToUpdate.Activities = student.Activities;
+                studentToUpdate.Comments = student.Comments;
+                studentToUpdate.FirstName = student.FirstName;
+                studentToUpdate.LastName = student.LastName;
+                studentToUpdate.GroupId = student.GroupId;
+
+                var studentsRaitings = context
+                    .Ratings
+                    .Where(x => x.StudentId == student.Id)
+                    .ToList();
+
+                var mathRatings = studentsRaitings
+                    .Where(x => x.SubjectId == (int)Subject.Math)
+                    .Select(x => x.Rate);
+
+                var newMathRatings = ratings
+                    .Where(x => x.SubjectId == (int)Subject.Math)
+                    .Select(x => x.Rate);
+
+                var mathRatingsToDelete = mathRatings.Except(newMathRatings).ToList();
+                var mathRatingsToAdd = newMathRatings.Except(mathRatings).ToList();
+
+                mathRatingsToDelete.ForEach(x =>
+               {
+                   var ratingToDelete = context.Ratings.First(y =>
+                        y.Rate == x &&
+                        y.StudentId == student.Id &&
+                        y.SubjectId == (int)Subject.Math);
+
+                   context.Ratings.Remove(ratingToDelete);
+               });
+
+                mathRatingsToAdd.ForEach(x =>
+                {
+                    var ratingToAdd = new Rating
+                    {
+                        Rate = x,
+                        StudentId = student.Id,
+                        SubjectId = (int)Subject.Math
+                    };
+                    context.Ratings.Add(ratingToAdd);     
+                });
+
+
+            }
+        }
+
+                public void AddStudent(StudentWrapper studentWrapper)
+        {
+            var student = studentWrapper.ToDao();
+            var ratings = studentWrapper.ToRatingDao();
+
+            using(var context = new ApplicationDbContext())
+            {
+                var dbStudent = context.Students.Add(student);
+
+                ratings.ForEach(x =>
+                {
+                    x.StudentId = dbStudent.Id;
+                    context.Ratings.Add(x);
+                });
+
                 context.SaveChanges();
             }
         }
