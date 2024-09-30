@@ -59,17 +59,9 @@ namespace WpfStudentsDiary
 
             using (var context = new ApplicationDbContext())
             {
-                var studentToUpdate = context.Students.Find(student.Id);
-                studentToUpdate.Activities = student.Activities;
-                studentToUpdate.Comments = student.Comments;
-                studentToUpdate.FirstName = student.FirstName;
-                studentToUpdate.LastName = student.LastName;
-                studentToUpdate.GroupId = student.GroupId;
+                UpdateStudentProperties(context, student);
 
-                var studentsRaitings = context
-                    .Ratings
-                    .Where(x => x.StudentId == student.Id)
-                    .ToList();
+                var studentsRaitings = GetStudentsRatings(context, student);
 
                 UpdateRate(student, ratings, context, studentsRaitings,
                     Subject.Math);
@@ -84,6 +76,24 @@ namespace WpfStudentsDiary
 
                 context.SaveChanges();
             }
+        }
+        private static List<Rating> GetStudentsRatings(ApplicationDbContext context, Student student)
+        {
+            return context
+                    .Ratings
+                    .Where(x => x.StudentId == student.Id)
+                    .ToList();
+        }
+
+        private void UpdateStudentProperties(ApplicationDbContext context, Student student)
+        {
+            var studentToUpdate = context.Students.Find(student.Id);
+            studentToUpdate.Activities = student.Activities;
+            studentToUpdate.Comments = student.Comments;
+            studentToUpdate.FirstName = student.FirstName;
+            studentToUpdate.LastName = student.LastName;
+            studentToUpdate.GroupId = student.GroupId;
+
         }
 
         public static void UpdateRate(Student student, List<Rating> ratings, ApplicationDbContext context, List<Rating> studentsRatings, Subject subject)

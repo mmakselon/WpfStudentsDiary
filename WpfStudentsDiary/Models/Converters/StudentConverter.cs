@@ -60,7 +60,7 @@ namespace WpfStudentsDiary.Models.Converters
         {
             var ratings = new List<Rating>();
 
-            if(string.IsNullOrWhiteSpace(model.Math))
+            if(!string.IsNullOrWhiteSpace(model.Math))
                 model.Math.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                     new Rating
@@ -69,8 +69,8 @@ namespace WpfStudentsDiary.Models.Converters
                         StudentId=model.Id,
                         SubjectId=(int)Subject.Math
                     }));
-            if (string.IsNullOrWhiteSpace(model.Physics))
-                model.Math.Split(',').ToList().ForEach(x =>
+            if (!string.IsNullOrWhiteSpace(model.Physics))
+                model.Physics.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                     new Rating
                     {
@@ -78,8 +78,8 @@ namespace WpfStudentsDiary.Models.Converters
                         StudentId = model.Id,
                         SubjectId = (int)Subject.Physics
                     }));
-            if (string.IsNullOrWhiteSpace(model.PolishLang))
-                model.Math.Split(',').ToList().ForEach(x =>
+            if (!string.IsNullOrWhiteSpace(model.PolishLang))
+                model.PolishLang.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                     new Rating
                     {
@@ -87,8 +87,8 @@ namespace WpfStudentsDiary.Models.Converters
                         StudentId = model.Id,
                         SubjectId = (int)Subject.PolishLang
                     }));
-            if (string.IsNullOrWhiteSpace(model.ForeignLang))
-                model.Math.Split(',').ToList().ForEach(x =>
+            if (!string.IsNullOrWhiteSpace(model.ForeignLang))
+                model.ForeignLang.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                     new Rating
                     {
@@ -96,8 +96,8 @@ namespace WpfStudentsDiary.Models.Converters
                         StudentId = model.Id,
                         SubjectId = (int)Subject.ForeignLang
                     }));
-            if (string.IsNullOrWhiteSpace(model.Technology))
-                model.Math.Split(',').ToList().ForEach(x =>
+            if (!string.IsNullOrWhiteSpace(model.Technology))
+                model.Technology.Split(',').ToList().ForEach(x =>
                 ratings.Add(
                     new Rating
                     {
