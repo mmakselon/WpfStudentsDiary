@@ -106,7 +106,7 @@ namespace WpfStudentsDiary.ViewModels
             if (dialog != MessageDialogResult.Affirmative)
                 return;
 
-            //usuwanie ucznia z bazy
+            _repository.DeleteStudent(SelectedStudent.Id);
 
             RefreshDiary();
         }
@@ -135,27 +135,8 @@ namespace WpfStudentsDiary.ViewModels
 
         private void RefreshDiary()
         {
-            Students = new ObservableCollection<StudentWrapper>
-            {
-                new StudentWrapper
-                {
-                    FirstName="Kazimierz",
-                    LastName="Górka",
-                    Group=new GroupWrapper{Id=1}
-                },
-                new StudentWrapper
-                {
-                    FirstName="Marek",
-                    LastName="Nowak",
-                    Group=new GroupWrapper{Id=2}
-                },
-                new StudentWrapper
-                {
-                    FirstName="Jan",
-                    LastName="Kowalski",
-                    Group=new GroupWrapper{Id=1}
-                }
-            };
+            Students = new ObservableCollection<StudentWrapper>(
+                _repository.GetStudents(SelectedGroupId));
         }
     }
 }

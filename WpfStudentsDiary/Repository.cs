@@ -6,6 +6,7 @@ using WpfStudentsDiary.Models.Domains;
 using WpfStudentsDiary.Models.Wrappers;
 using System.Data.Entity;
 using WpfStudentsDiary.Models.Converters;
+using System;
 
 namespace WpfStudentsDiary
 {
@@ -37,6 +38,16 @@ namespace WpfStudentsDiary
                     .ToList()
                     .Select(x=> x.ToWrapper())
                     .ToList();
+            }
+        }
+
+        public void DeleteStudent(int id)
+        {
+            using(var context = new ApplicationDbContext())
+            {
+                var studentToDelete = context.Students.Find(id);
+                context.Students.Remove(studentToDelete);
+                context.SaveChanges();
             }
         }
     }
