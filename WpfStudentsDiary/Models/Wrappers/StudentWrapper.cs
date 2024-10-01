@@ -27,6 +27,9 @@ namespace WpfStudentsDiary.Models.Wrappers
         public bool Activities { get; set; }
         public GroupWrapper Group { get; set; }
 
+        private bool _isFirstNameValid;
+        private bool _isLastNameValid;
+
         public string this[string columnName]
         {
             get
@@ -37,20 +40,24 @@ namespace WpfStudentsDiary.Models.Wrappers
                         if (string.IsNullOrWhiteSpace(FirstName))
                         {
                             Error = "Pole Imię jest wymagane.";
+                            _isFirstNameValid = false;
                         }
                         else
                         {
                             Error = string.Empty;
+                            _isFirstNameValid = true;
                         }
                         break;
                     case nameof(LastName):
                         if (string.IsNullOrWhiteSpace(LastName))
                         {
                             Error = "Pole Nazwisko jest wymagane.";
+                            _isLastNameValid = false;
                         }
                         else
                         {
                             Error = string.Empty;
+                            _isLastNameValid = true;
                         }
                         break;
                     default:
@@ -60,6 +67,14 @@ namespace WpfStudentsDiary.Models.Wrappers
             }
         }
 
-        public string Error {get;set;}
+        public string Error { get; set; }
+
+        public bool IsValid
+        {
+            get
+            {
+                return _isFirstNameValid && _isLastNameValid && Group.IsValid;
+            }
+        } 
     }
 }
